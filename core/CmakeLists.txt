@@ -1,0 +1,24 @@
+add_library(core SHARED)
+
+target_compile_options(core PRIVATE ${COMPILE_OPTIONS})
+target_compile_features(core PRIVATE ${COMPILE_FEATURES})
+
+target_sources(core PRIVATE
+	src/library.c
+
+	src/data_set.c
+	src/full_connected.c
+
+	src/image_set.c
+	src/max_pooling.c
+	src/convolution.c
+
+	src/nn.c
+)
+
+target_include_directories(core PUBLIC
+	src
+	include
+)
+
+set_target_properties(core PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/)
