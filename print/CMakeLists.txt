@@ -9,6 +9,7 @@ target_sources(print PRIVATE
 
 	src/print_image_set.c
 	src/print_max_pooling.c
+	src/print_convolution.c
 )
 
 target_include_directories(print PRIVATE

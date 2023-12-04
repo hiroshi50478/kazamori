@@ -10,5 +10,6 @@
 
 #include "image_set.h"
 #include "max_pooling.h"
+#include "convolution.h"
 
 #include "nn.h"

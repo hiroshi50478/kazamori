@@ -9,11 +9,18 @@ typedef struct Convolution {
 	int stride_h;
 	int stride_w;
 
+	int __input_height;
+	int __input_width;
+	int __output_height;
+	int __output_width;
+
 	double*** input;
 	double*** output;
 	double**** matrix;
 	double*** bias;
 	double*** err;
+	double**** delta_matrix;
+	double*** delta_bias;
 
 	double learning_rate;
 	double momentum;
