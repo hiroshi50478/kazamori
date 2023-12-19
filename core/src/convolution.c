@@ -217,6 +217,7 @@ void Convolution_backward(Convolution* layer, double*** output) {
 			}
 		}
 	}
+	
 
 	for (int mc = 0; mc < layer->matrix_c; ++mc) {
 		for (int c = 0; c < layer->channels; ++c) {

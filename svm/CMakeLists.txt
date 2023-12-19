@@ -9,15 +9,16 @@ target_sources(svm PRIVATE
 
 target_include_directories(svm PRIVATE
     ${SDL2_INCLUDE_DIRS}
-    core
-    print
+    ${CMAKE_SOURCE_DIR}/core/include
+    ${CMAKE_SOURCE_DIR}/core/src
+    ${CMAKE_SOURCE_DIR}/print/include
 )
 
 target_link_libraries(svm PRIVATE
     ${SDL2_LIBRARIES}
 
-    core
-    print
+    ${CMAKE_BUILD_DIR}/libcore.dll
+    ${CMAKE_BUILD_DIR}/libprint.dll
 )
 
 set_target_properties(svm PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/)

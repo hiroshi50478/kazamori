@@ -14,15 +14,14 @@ target_sources(print PRIVATE
 
 target_include_directories(print PRIVATE
 	core
-	src
-)
-
-target_link_libraries(print PRIVATE
-	core
 )
 
 target_include_directories(print PUBLIC
 	include
+)
+
+target_link_libraries(print PRIVATE
+	core
 )
 
 set_target_properties(print PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/)

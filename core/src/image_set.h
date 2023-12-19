@@ -13,3 +13,5 @@ ImageSet* ImageSet_construct(int length, int channels, int height, int width, in
 void ImageSet_destruct(ImageSet* image_set);
 
 void ImageSet_add(ImageSet* image_set, double input[], double output[]);
+void ImageSet_save(ImageSet* image_set);
+void ImageSet_load(ImageSet* image_set);

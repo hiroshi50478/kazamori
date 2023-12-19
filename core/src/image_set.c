@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "image_set.h"
@@ -82,4 +83,64 @@ void ImageSet_add(ImageSet* image_set, double input[], double output[]) {
 	for (int i = 0; i < image_set->output_length; ++i) {
 		image_set->output[image_set->__current_length__ - 1][i] = output[i];
 	}
+}
+
+void ImageSet_save(ImageSet* image_set) {
+    FILE* file = fopen("data.txt", "w");
+    if (file == NULL) {
+        printf("!!! ERROR in file handling for saving !!!\n");
+    }
+    fprintf(file, "%d %d %d %d %d ", image_set->length, image_set->channels, image_set->height, image_set->width, image_set->output_length);
+
+    for (int i = 0; i < image_set->length; ++i) {
+    	for (int c = 0; c < image_set->channels; ++c) {
+    		for (int h = 0; h < image_set->height; ++h) {
+    			for (int w = 0; w < image_set->width; ++w) {
+    				fprintf(file, "%lf ", image_set->input[i][c][h][w]);
+    			}
+    		}
+    	}
+    	for (int o = 0; o < image_set->output_length; ++o) {
+    		fprintf(file, "%lf ", image_set->output[i][o]);
+    	}
+    }
+    
+    fclose(file);
+}
+
+void ImageSet_load(ImageSet* image_set) {
+    FILE* file = fopen("data.txt", "r");
+    if (file == NULL) {
+        printf("!!! ERROR in file handling for saving !!!\n");
+    }
+
+    int length, channels, height, width, output_length;
+    fscanf(file, "%d %d %d %d %d ", &length, &channels, &height, &width, &output_length);
+    if (channels != image_set->channels) {
+    	printf("!!! ERROR loaded ImageSet channels (%d) dont equal current ImageSet (%d) !!!\n", channels, image_set->channels);
+    }
+    if (height != image_set->height) {
+    	printf("!!! ERROR loaded ImageSet height (%d) dont equal current ImageSet (%d) !!!\n", height, image_set->height);
+    }
+    if (width != image_set->width) {
+    	printf("!!! ERROR loaded ImageSet width (%d) dont equal current ImageSet (%d) !!!\n", width, image_set->width);
+    }
+    if (output_length != image_set->output_length) {
+    	printf("!!! ERROR loaded ImageSet output_length (%d) dont equal current ImageSet (%d) !!!\n", output_length, image_set->output_length);
+    }
+
+    for (int i = 0; i < image_set->length; ++i) {
+    	for (int c = 0; c < image_set->channels; ++c) {
+    		for (int h = 0; h < image_set->height; ++h) {
+    			for (int w = 0; w < image_set->width; ++w) {
+    				fscanf(file, "%lf ", &image_set->input[i][c][h][w]);
+    			}
+    		}
+    	}
+    	for (int o = 0; o < image_set->output_length; ++o) {
+    		fscanf(file, "%lf ", &image_set->output[i][o]);
+    	}
+    }
+    
+    fclose(file);
 }
